@@ -40,7 +40,7 @@
 | `order_line`      | Lists books in each order.                                 |
 | `shipping_method` | Shipping options (e.g., Standard, Express).                |
 
-**Full Schema:** See [SQL Scripts](/sql_scripts/) for table definitions.
+**Full Schema:** See [SQL Scripts](/bookstore_setup.sql/) for table definitions.
 
 ---
 
@@ -49,8 +49,8 @@
 ### **1. Clone the Repository**
 
 ```bash
-git clone https://github.com/yourusername/bookstore-db.git
-cd bookstore-db
+https://github.com/vkamole/bookstore-db-scribes.git
+cd bookstore-db-scribes
 ```
 
 ### **2. Database Installation**
