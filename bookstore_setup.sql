@@ -184,3 +184,25 @@ VALUES (1, 1, 1, 12.99), (2, 2, 2, 19.98);
 -- Insert order history (status changes)
 INSERT INTO order_history (order_id, status_id)
 VALUES (1, 1), (2, 1), (1, 2), (2, 3);
+
+-- Create roles
+CREATE ROLE manager,staff;
+
+-- Assign privileges to roles
+GRANT ALL ON bookstore_db.* TO manager;
+GRANT SELECT,UPDATE ON bookstore_db.* TO staff;
+
+-- Create users
+CREATE USER 'mary'@'localhost'
+IDENTIFIED BY "1234";
+
+CREATE USER 'luke'@'localhost'
+IDENTIFIED BY "5678";
+
+CREATE USER 'nate'@'localhost'
+IDENTIFIED BY "91011";
+
+-- Assign roles to users
+GRANT manager TO mary@localhost;
+GRANT staff TO luke@localhost;
+GRANT staff TO nate@localhost;
