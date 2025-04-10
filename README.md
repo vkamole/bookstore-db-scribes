@@ -59,14 +59,54 @@ cd bookstore-db-scribes
   1. `schema/create_tables.sql` (Creates tables).
   2. `data/insert_sample_data.sql` (Optional test data).
 
-### **3. Configure Users & Permissions**
+Here's the updated **User Roles & Permissions** section for your README.md:
 
-Execute:
+---
+
+## **👥 User Roles & Permissions**
+
+### **1. Create Roles & Assign Privileges**
 
 ```sql
-CREATE USER 'bookstore_admin'@'localhost' IDENTIFIED BY 'securepass123';
-GRANT ALL PRIVILEGES ON bookstore_db.* TO 'bookstore_admin'@'localhost';
+-- Create roles
+CREATE ROLE bookstore_manager, bookstore_staff;
+
+-- Assign privileges
+GRANT ALL PRIVILEGES ON bookstore_db.* TO bookstore_manager;  -- Full access
+GRANT SELECT, UPDATE ON bookstore_db.* TO bookstore_staff;    -- Read/Edit only
 ```
+
+### **2. Create Users & Assign Roles**
+
+```sql
+-- Admin (Manager role)
+CREATE USER 'mary'@'localhost' IDENTIFIED BY '1234';
+GRANT bookstore_manager TO 'mary'@'localhost';
+
+-- Staff (Limited access)
+CREATE USER 'luke'@'localhost' IDENTIFIED BY '5678';
+CREATE USER 'nate'@'localhost' IDENTIFIED BY '91011';
+GRANT bookstore_staff TO 'luke'@'localhost', 'nate'@'localhost';
+```
+
+### **3. Activate Roles**
+
+```sql
+-- For each user, set default role:
+SET DEFAULT ROLE ALL TO
+  'mary'@'localhost',
+  'luke'@'localhost',
+  'nate'@'localhost';
+```
+
+### **Role Summary**
+
+| Role                | Privileges                     | Assigned Users                 |
+| ------------------- | ------------------------------ | ------------------------------ |
+| `bookstore_manager` | Full access (`ALL`)            | mary@localhost                 |
+| `bookstore_staff`   | Read/Update (`SELECT, UPDATE`) | luke@localhost, nate@localhost |
+
+---
 
 ---
 

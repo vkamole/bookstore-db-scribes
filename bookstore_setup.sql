@@ -186,11 +186,11 @@ INSERT INTO order_history (order_id, status_id)
 VALUES (1, 1), (2, 1), (1, 2), (2, 3);
 
 -- Create roles
-CREATE ROLE manager,staff;
+CREATE ROLE bookstore_manager,bookstore_staff;
 
 -- Assign privileges to roles
-GRANT ALL ON bookstore_db.* TO manager;
-GRANT SELECT,UPDATE ON bookstore_db.* TO staff;
+GRANT ALL ON bookstore_db.* TO bookstore_manager;
+GRANT SELECT,UPDATE ON bookstore_db.* TO bookstore_staff;
 
 -- Create users
 CREATE USER 'mary'@'localhost'
@@ -203,6 +203,8 @@ CREATE USER 'nate'@'localhost'
 IDENTIFIED BY "91011";
 
 -- Assign roles to users
-GRANT manager TO mary@localhost;
-GRANT staff TO luke@localhost;
-GRANT staff TO nate@localhost;
+GRANT bookstore_manager TO mary@localhost;
+GRANT bookstore_staff TO luke@localhost;
+GRANT bookstore_staff TO nate@localhost;
+
+FLUSH PRIVILEGES;
